@@ -43,8 +43,8 @@ public class ClienteService {
 				return repository.save(cliente);
 			});		
 			return toModel(clienteEncontrado.get());
-		}catch(NoSuchElementException i) {
-			i.getMessage();
+		}catch(NoSuchElementException nse) {
+			nse.getMessage();
 			// throw  new NegocioException("Cliente não encontrado.");
 		}
 		return null;
@@ -55,13 +55,24 @@ public class ClienteService {
 		if(Objects.nonNull(clienteEncontrado)) {
 			// throw  new NegocioException("Já existe cliente cadastrado com este cpf");
 		}
-	}		
+	}
 	
-	public Optional<Cliente> buscaClientePeloId(Integer id) {
+	public ClienteOutput clienteEncontradoPeloId(Integer id) {
+		try {
+			Cliente clienteEncontrado = buscaClientePeloId(id).get();
+			return toModel(clienteEncontrado);
+		}catch(NoSuchElementException nse) {
+			nse.getMessage();
+			// throw new NegocioException("Cliente não encontrado")
+		}
+		return null;
+	}
+	
+	private Optional<Cliente> buscaClientePeloId(Integer id) {
 		return repository.findById(id);
 	}
 	
-	public ClienteOutput toModel(Cliente entity) {
+	private ClienteOutput toModel(Cliente entity) {
 		return modelMapper.map(entity, ClienteOutput.class);
 	}
 	

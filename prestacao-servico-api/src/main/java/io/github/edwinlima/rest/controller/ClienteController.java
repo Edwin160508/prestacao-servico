@@ -3,6 +3,7 @@ package io.github.edwinlima.rest.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -34,5 +35,10 @@ public class ClienteController {
 	public ResponseEntity<Void> atualizar(@PathVariable Integer id,@RequestBody ClienteInput cliente){
 		service.atualizar(id, cliente);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<ClienteOutput> buscarClientePeloId(@PathVariable Integer id){
+		return ResponseEntity.ok(service.clienteEncontradoPeloId(id));
 	}
 }
