@@ -2,6 +2,8 @@ package io.github.edwinlima.rest.model;
 
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class ClienteOutput {
     private Integer id;
 	
@@ -9,6 +11,7 @@ public class ClienteOutput {
 	
 	private String cpf;
 	
+	@JsonFormat(pattern = "dd/MM/yyyy")
 	private LocalDate dataCadastro;
 
 	public Integer getId() {

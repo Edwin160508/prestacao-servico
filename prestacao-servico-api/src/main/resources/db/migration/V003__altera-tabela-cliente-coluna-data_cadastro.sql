@@ -1,0 +1,1 @@
+ALTER TABLE cliente MODIFY data_cadastro DATETIME NULL;
