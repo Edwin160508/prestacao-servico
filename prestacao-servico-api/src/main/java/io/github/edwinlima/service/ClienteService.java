@@ -68,6 +68,16 @@ public class ClienteService {
 		return null;
 	}
 	
+	public void remover(Integer id) {
+		try {
+			 Optional<Cliente> clienteEncontrado = buscaClientePeloId(id);
+			 repository.delete(clienteEncontrado.get());
+		}catch(NoSuchElementException nse) {
+			nse.getMessage();
+		    // throw new NegocioException("Não foi possívem remover, cliente não encontrado.")
+		}
+	} 
+	
 	private Optional<Cliente> buscaClientePeloId(Integer id) {
 		return repository.findById(id);
 	}
