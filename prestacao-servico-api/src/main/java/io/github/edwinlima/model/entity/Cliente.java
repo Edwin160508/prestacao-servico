@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.PrePersist;
 
 @Entity
 public class Cliente {
@@ -78,5 +79,8 @@ public class Cliente {
 		return true;
 	}
 
-	
+	@PrePersist
+	public void prePersist() {
+		setDataCadastro(LocalDate.now());
+	}
 }

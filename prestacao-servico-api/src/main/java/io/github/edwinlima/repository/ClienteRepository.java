@@ -8,5 +8,5 @@ import io.github.edwinlima.model.entity.Cliente;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer>{
 
-	
+	public Cliente findByCpf(String cpf);
 }
