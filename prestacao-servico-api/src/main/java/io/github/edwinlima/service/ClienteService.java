@@ -1,5 +1,6 @@
 package io.github.edwinlima.service;
 
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -33,14 +34,20 @@ public class ClienteService {
 		
 	}
 	
-	public ClienteOutput atualizar(Integer id,ClienteInput clienteInput) {				
-		Optional<Cliente> clienteEncontrado = buscaClientePeloId(id);
-		clienteEncontrado.map(cliente -> {
-			cliente.setNome(clienteInput.getNome());
-			cliente.setCpf(clienteInput.getCpf());
-			return repository.save(cliente);
-		});		
-		return toModel(clienteEncontrado.get());				
+	public ClienteOutput atualizar(Integer id,ClienteInput clienteInput) {	
+		try {
+			Optional<Cliente> clienteEncontrado = buscaClientePeloId(id);
+			clienteEncontrado.map(cliente -> {
+				cliente.setNome(clienteInput.getNome());
+				cliente.setCpf(clienteInput.getCpf());
+				return repository.save(cliente);
+			});		
+			return toModel(clienteEncontrado.get());
+		}catch(NoSuchElementException i) {
+			i.getMessage();
+			// throw  new NegocioException("Cliente não encontrado.");
+		}
+		return null;
 	}
 	
 	private void validaCliente(ClienteInput cliente) {
@@ -48,7 +55,7 @@ public class ClienteService {
 		if(Objects.nonNull(clienteEncontrado)) {
 			// throw  new NegocioException("Já existe cliente cadastrado com este cpf");
 		}
-	}
+	}		
 	
 	public Optional<Cliente> buscaClientePeloId(Integer id) {
 		return repository.findById(id);
