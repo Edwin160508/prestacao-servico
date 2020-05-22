@@ -1,5 +1,7 @@
 package io.github.edwinlima.rest.model;
 
+import java.time.LocalDate;
+
 public class ClienteInput {
 	
 	private Integer id;
@@ -7,6 +9,8 @@ public class ClienteInput {
 	private String nome;
 	
 	private String cpf;
+	
+	private LocalDate dataCadastro;
 
 	public Integer getId() {
 		return id;
@@ -30,6 +34,14 @@ public class ClienteInput {
 
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
+	}
+
+	public LocalDate getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(LocalDate dataCadastro) {
+		this.dataCadastro = dataCadastro;
 	}
 	
 	

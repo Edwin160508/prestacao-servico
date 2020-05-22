@@ -26,16 +26,22 @@ public class ClienteService {
 		this.modelMapper = modelMapper;
 	}
 	
-	public ClienteOutput salvar(Integer id,ClienteInput cliente) {
-		ClienteOutput retorno = null;
-		if(Objects.isNull(id)) {
-			validaCliente(cliente);
-			Cliente clienteSalvo = repository.save(toEntity(cliente));
-			retorno = toModel(clienteSalvo);
-		}else {
-			retorno = toModel(repository.save(toEntity(cliente)));
-		}
-		return retorno;
+	public ClienteOutput salvar(ClienteInput cliente) {		
+		validaCliente(cliente);
+		Cliente clienteSalvo = repository.save(toEntity(cliente));
+		return toModel(clienteSalvo);
+		
+	}
+	
+	public ClienteOutput atualizar(Integer id,ClienteInput clienteInput) {				
+		Optional<Cliente> clienteEncontrado = buscaClientePeloId(id);
+		clienteEncontrado.map(cliente -> {
+			clienteInput.setId(cliente.getId());
+			clienteInput.setDataCadastro(cliente.getDataCadastro());
+			return clienteInput;
+		});
+		Cliente clienteAtualizado = repository.save(toEntity(clienteInput));
+		return toModel(clienteAtualizado);				
 	}
 	
 	private void validaCliente(ClienteInput cliente) {

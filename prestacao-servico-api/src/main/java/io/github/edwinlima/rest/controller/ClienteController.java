@@ -1,7 +1,5 @@
 package io.github.edwinlima.rest.controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.github.edwinlima.model.entity.Cliente;
 import io.github.edwinlima.rest.model.ClienteInput;
 import io.github.edwinlima.rest.model.ClienteOutput;
 import io.github.edwinlima.service.ClienteService;
@@ -30,15 +27,11 @@ public class ClienteController {
 	
 	@PostMapping
 	public ResponseEntity<ClienteOutput> salvar(@RequestBody ClienteInput cliente){
-		return ResponseEntity.status(HttpStatus.CREATED).body(service.salvar(null, cliente));
+		return ResponseEntity.status(HttpStatus.CREATED).body(service.salvar(cliente));
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<ClienteOutput> atualizar(@PathVariable Integer id,@RequestBody ClienteInput cliente){
-		Optional<Cliente> clienteEncontrado = service.buscaClientePeloId(id);
-		if(clienteEncontrado.isPresent()) {
-			return ResponseEntity.ok(service.salvar(id, cliente));
-		}
-		return ResponseEntity.notFound().build();
+	public ResponseEntity<ClienteOutput> atualizar(@PathVariable Integer id,@RequestBody ClienteInput cliente){		
+		return ResponseEntity.ok(service.atualizar(id, cliente));
 	}
 }
