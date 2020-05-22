@@ -36,12 +36,11 @@ public class ClienteService {
 	public ClienteOutput atualizar(Integer id,ClienteInput clienteInput) {				
 		Optional<Cliente> clienteEncontrado = buscaClientePeloId(id);
 		clienteEncontrado.map(cliente -> {
-			clienteInput.setId(cliente.getId());
-			clienteInput.setDataCadastro(cliente.getDataCadastro());
-			return clienteInput;
-		});
-		Cliente clienteAtualizado = repository.save(toEntity(clienteInput));
-		return toModel(clienteAtualizado);				
+			cliente.setNome(clienteInput.getNome());
+			cliente.setCpf(clienteInput.getCpf());
+			return repository.save(cliente);
+		});		
+		return toModel(clienteEncontrado.get());				
 	}
 	
 	private void validaCliente(ClienteInput cliente) {

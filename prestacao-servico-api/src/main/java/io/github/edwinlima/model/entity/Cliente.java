@@ -19,7 +19,7 @@ public class Cliente {
 	private String nome;
 	@Column(nullable = false, length = 11)
 	private String cpf;
-	@Column(name = "data_cadastro")
+	@Column(name = "data_cadastro", updatable = false)
 	private LocalDate dataCadastro;
 
 	public String getNome() {
