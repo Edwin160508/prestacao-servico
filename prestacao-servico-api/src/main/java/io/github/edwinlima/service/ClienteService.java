@@ -28,7 +28,7 @@ public class ClienteService {
 	}
 	
 	public ClienteOutput salvar(ClienteInput cliente) {		
-		validaCliente(cliente);
+		validaClienteCpfRepetido(cliente);
 		Cliente clienteSalvo = repository.save(toEntity(cliente));
 		return toModel(clienteSalvo);
 		
@@ -50,7 +50,7 @@ public class ClienteService {
 		return null;
 	}
 	
-	private void validaCliente(ClienteInput cliente) {
+	private void validaClienteCpfRepetido(ClienteInput cliente) {
 		Cliente clienteEncontrado = repository.findByCpf(cliente.getCpf());
 		if(Objects.nonNull(clienteEncontrado)) {
 			// throw  new NegocioException("Já existe cliente cadastrado com este cpf");
