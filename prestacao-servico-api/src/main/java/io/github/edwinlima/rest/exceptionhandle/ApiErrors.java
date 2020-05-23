@@ -1,27 +1,21 @@
 package io.github.edwinlima.rest.exceptionhandle;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class ApiErrors {
 
-	private List<String> errors;
-
-
-	public ApiErrors(List<String> errors) {
-		this.errors = errors;
-	}
+	private String mensagemUsuario;
+	private String mensagemDesenvolvedor;
 	
-	public ApiErrors(String message) {
-		this.errors = Arrays.asList(message);
-	}
-	
-	public List<String> getErrors() {
-		return errors;
+	public ApiErrors(String mensagemUsuario, String mensagemDesenvolvedor) {
+		this.mensagemUsuario = mensagemUsuario;
+		this.mensagemDesenvolvedor = mensagemDesenvolvedor;
 	}
 
-	public void setErrors(List<String> errors) {
-		this.errors = errors;
+	public String getMensagemUsuario() {
+		return mensagemUsuario;
+	}
+
+	public String getMensagemDesenvolvedor() {
+		return mensagemDesenvolvedor;
 	}
 		
 }
