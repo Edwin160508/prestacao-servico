@@ -11,11 +11,11 @@ public class ClienteInput {
 	
 	private Integer id;
 	
-	@NotEmpty
+	@NotEmpty(message = "{campo.nome.obrigatorio}")
 	private String nome;
 	
-	@NotNull
-	@CPF
+	@NotNull(message = "{campo.cpf.obrigatorio}")
+	@CPF(message = "{campo.cpf.invalido}")
 	private String cpf;
 	
 	private LocalDate dataCadastro;
