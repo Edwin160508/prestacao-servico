@@ -1,4 +1,4 @@
-package io.github.edwinlima.rest.exception;
+package io.github.edwinlima.rest.exceptionhandle;
 
 import java.util.Arrays;
 import java.util.List;
