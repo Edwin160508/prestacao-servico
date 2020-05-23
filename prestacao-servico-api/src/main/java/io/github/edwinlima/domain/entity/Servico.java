@@ -1,34 +1,29 @@
-package io.github.edwinlima.model.entity;
+package io.github.edwinlima.domain.entity;
 
-import java.time.LocalDate;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.PrePersist;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
-public class Cliente {
-
+public class Servico {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	@Column(nullable = false, length = 150)
-	private String nome;
-	@Column(nullable = false, length = 11)
-	private String cpf;
-	@Column(name = "data_cadastro", updatable = false)
-	private LocalDate dataCadastro;
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+	private String descricao;
+	
+	@Column(nullable = false)
+	private BigDecimal valor;
+	
+	@ManyToOne
+	@JoinColumn(name = "id_cliente")
+	private Cliente cliente;
 
 	public Integer getId() {
 		return id;
@@ -38,22 +33,30 @@ public class Cliente {
 		this.id = id;
 	}
 
-	public String getCpf() {
-		return cpf;
+	public String getDescricao() {
+		return descricao;
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
-	public LocalDate getDataCadastro() {
-		return dataCadastro;
+	public BigDecimal getValor() {
+		return valor;
 	}
 
-	public void setDataCadastro(LocalDate dataCadastro) {
-		this.dataCadastro = dataCadastro;
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
 	}
-	
+
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -70,7 +73,7 @@ public class Cliente {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Cliente other = (Cliente) obj;
+		Servico other = (Servico) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -78,9 +81,6 @@ public class Cliente {
 			return false;
 		return true;
 	}
-
-	@PrePersist
-	public void prePersist() {
-		setDataCadastro(LocalDate.now());
-	}
+	
+	
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import io.github.edwinlima.rest.exception.ApiErrors;
+import io.github.edwinlima.rest.exceptionhandle.ApiErrors;
 
 @RestControllerAdvice
 public class ApplicationControllerAdvice {

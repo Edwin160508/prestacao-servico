@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.github.edwinlima.domain.service.ClienteService;
 import io.github.edwinlima.rest.model.ClienteInput;
 import io.github.edwinlima.rest.model.ClienteOutput;
-import io.github.edwinlima.service.ClienteService;
 
 @RestController
 @RequestMapping("/cliente")

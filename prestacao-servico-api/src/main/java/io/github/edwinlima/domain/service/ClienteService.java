@@ -1,4 +1,4 @@
-package io.github.edwinlima.service;
+package io.github.edwinlima.domain.service;
 
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -8,8 +8,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import io.github.edwinlima.model.entity.Cliente;
-import io.github.edwinlima.repository.ClienteRepository;
+import io.github.edwinlima.domain.entity.Cliente;
+import io.github.edwinlima.domain.repository.ClienteRepository;
 import io.github.edwinlima.rest.model.ClienteInput;
 import io.github.edwinlima.rest.model.ClienteOutput;
 
