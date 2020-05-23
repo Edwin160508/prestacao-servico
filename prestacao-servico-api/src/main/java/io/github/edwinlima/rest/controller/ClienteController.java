@@ -1,5 +1,7 @@
 package io.github.edwinlima.rest.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,12 +30,12 @@ public class ClienteController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<ClienteOutput> salvar(@RequestBody ClienteInput cliente){
+	public ResponseEntity<ClienteOutput> salvar(@Valid @RequestBody ClienteInput cliente){
 		return ResponseEntity.status(HttpStatus.CREATED).body(service.salvar(cliente));
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Void> atualizar(@PathVariable Integer id,@RequestBody ClienteInput cliente){
+	public ResponseEntity<Void> atualizar(@PathVariable Integer id,@Valid @RequestBody ClienteInput cliente){
 		service.atualizar(id, cliente);
 		return ResponseEntity.noContent().build();
 	}
