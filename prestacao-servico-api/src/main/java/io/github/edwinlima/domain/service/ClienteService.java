@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import io.github.edwinlima.domain.entity.Cliente;
-import io.github.edwinlima.domain.exception.NegocioException;
+import io.github.edwinlima.domain.exception.ClienteCpfCadastradoException;
 import io.github.edwinlima.domain.repository.ClienteRepository;
 import io.github.edwinlima.rest.model.ClienteInput;
 import io.github.edwinlima.rest.model.ClienteOutput;
@@ -47,7 +47,7 @@ public class ClienteService {
 	private void validaClienteCpfRepetido(ClienteInput cliente) {
 		Cliente clienteEncontrado = repository.findByCpf(cliente.getCpf());
 		if(Objects.nonNull(clienteEncontrado)) {
-			throw  new NegocioException("Já existe cliente cadastrado com este cpf");
+			throw  new ClienteCpfCadastradoException("Já existe cliente cadastrado com este cpf");
 		}
 	}
 	

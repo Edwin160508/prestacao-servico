@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import io.github.edwinlima.domain.exception.ClienteCpfCadastradoException;
+
 @RestControllerAdvice
 public class ApplicationControllerAdviceHandler extends ResponseEntityExceptionHandler{
 	
@@ -66,5 +68,14 @@ public class ApplicationControllerAdviceHandler extends ResponseEntityExceptionH
 		String mensagemDesenvolvedor = ex.toString();
 		List<ApiErrors> erros = Arrays.asList(new ApiErrors(mensagemUsuario, mensagemDesenvolvedor));
 		return handleExceptionInternal(ex, erros, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
-	}		
+	}	
+	
+	@ExceptionHandler(ClienteCpfCadastradoException.class)
+	public ResponseEntity<Object> handleClienteCpfCadastradoException(ClienteCpfCadastradoException ne, WebRequest request){
+		String mensagemUsuario = messageSource.getMessage("cliente.com.mesmo.cpf", null, LocaleContextHolder.getLocale());
+		String mensagemDesenvolvedor = ne.toString();
+		List<ApiErrors> erros = Arrays.asList(new ApiErrors(mensagemUsuario, mensagemDesenvolvedor));
+		return handleExceptionInternal(ne, erros, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+		
+	}
 }
