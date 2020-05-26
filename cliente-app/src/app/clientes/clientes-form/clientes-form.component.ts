@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Cliente } from '../clientes';
 import { ClientesService } from '../../services/clientes.service';
 
@@ -14,7 +15,8 @@ export class ClientesFormComponent implements OnInit {
   erros: string[];
 
   constructor(
-    private service:ClientesService
+    private service:ClientesService,
+    private router:Router
     ) { 
     this.cliente = new Cliente();
     
@@ -36,5 +38,9 @@ export class ClientesFormComponent implements OnInit {
       this.erros = errorResponse.error;
       console.log(this.erros);      
     });
+  }
+
+  voltar(){
+    this.router.navigate(['/clientes-lista']);
   }
 }
