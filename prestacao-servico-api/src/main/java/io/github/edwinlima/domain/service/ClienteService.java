@@ -1,5 +1,7 @@
 package io.github.edwinlima.domain.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -71,5 +73,15 @@ public class ClienteService {
 	
 	private Cliente toEntity(ClienteInput clienteInput) {
 		return modelMapper.map(clienteInput, Cliente.class);
+	}
+	
+	public List<ClienteOutput> listar(){
+		List<Cliente> entityList = repository.findAll();
+		List<ClienteOutput> modelList = new ArrayList<ClienteOutput>();
+		for(Cliente cliente:entityList) {
+			modelList.add(toModel(cliente));			
+		}
+		
+		return modelList;
 	}
 }

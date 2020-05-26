@@ -22,4 +22,8 @@ export class ClientesService {
     return this.httpClient.post<Cliente>('http://localhost:8080/cliente',cliente);
   }
 
+  listar():Observable<Cliente[]>{
+    return this.httpClient.get<Cliente[]>('http://localhost:8080/cliente');
+  }
+
 }

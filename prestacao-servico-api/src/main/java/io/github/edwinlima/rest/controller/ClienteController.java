@@ -1,5 +1,7 @@
 package io.github.edwinlima.rest.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +53,10 @@ public class ClienteController {
 	public ResponseEntity<Void> remover(@PathVariable Integer id){
 		service.remover(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping
+	public ResponseEntity<List<ClienteOutput>> listar(){
+		return ResponseEntity.ok(service.listar());
 	}
 }
