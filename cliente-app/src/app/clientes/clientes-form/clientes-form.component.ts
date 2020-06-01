@@ -40,7 +40,7 @@ export class ClientesFormComponent implements OnInit {
     });
   }
 
-  voltar(){
+  voltarParaListagem(){
     this.router.navigate(['/clientes-lista']);
   }
 }
