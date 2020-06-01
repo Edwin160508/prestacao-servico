@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Cliente } from '../clientes';
 import { ClientesService } from 'src/app/services/clientes.service';
 
@@ -17,7 +17,7 @@ export class ClientesListaComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    this.listar();  
+    this.listar();      
   }
 
   listar(){

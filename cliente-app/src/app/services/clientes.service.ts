@@ -10,12 +10,8 @@ export class ClientesService {
 
   constructor(private httpClient: HttpClient) { }
 
-  getCliente(): Cliente{
-    let cliente:Cliente = new Cliente();
-    cliente.nome = 'Edwin Lima';
-    cliente.cpf = '07232244444'
-
-    return cliente;
+  buscarClientePeloId(id:number): Observable<Cliente>{    
+    return this.httpClient.get<Cliente>(`http://localhost:8080/cliente/${id}`);
   }
 
   salvar(cliente:Cliente):Observable<Cliente>{
