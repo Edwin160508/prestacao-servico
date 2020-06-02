@@ -26,12 +26,15 @@ export class ClientesFormComponent implements OnInit {
 
   ngOnInit(): void {
     let params = this.activatedRouter.params;
+    this.verificaParamsParaBuscarClientePeloId(params);
+  }
+
+  verificaParamsParaBuscarClientePeloId(params:any):void{
     if(params && params.value && params.value.id){
       this.id = params.value.id;
       this.buscarClientePeloId(this.id);
     }
   }
-
   buscarClientePeloId(id:number){
     this.service.buscarClientePeloId(id).subscribe(response=>{
       this.cliente = response;
@@ -40,18 +43,30 @@ export class ClientesFormComponent implements OnInit {
     });
   }
   onSubmit(){
-    this.service
-    .salvar(this.cliente)
-    .subscribe(response => {
-      console.log(response);
-      this.success = true;
-      this.erros = null;
-      this.cliente = response;
-    }, errorResponse =>{
-      this.success = false;
-      this.erros = errorResponse.error;
-      console.log(this.erros);      
-    });
+    if(this.id){
+      this.service
+      .atualizar(this.cliente)
+      .subscribe(response => {
+        this.success = true;
+        this.erros = null;        
+      },errorResponse =>{
+        this.success = false;
+        this.erros = errorResponse.error;
+      });
+    }else{
+        this.service
+        .salvar(this.cliente)
+          .subscribe(response => {
+            console.log(response);
+            this.success = true;
+            this.erros = null;
+            this.cliente = response;
+          }, errorResponse =>{
+            this.success = false;
+            this.erros = errorResponse.error;
+            console.log(this.erros);      
+          });
+    }
   }
 
   voltarParaListagem(){

@@ -22,4 +22,7 @@ export class ClientesService {
     return this.httpClient.get<Cliente[]>('http://localhost:8080/cliente');
   }
 
+  atualizar(cliente:Cliente):Observable<any>{
+    return this.httpClient.put<Cliente>(`http://localhost:8080/cliente/${cliente.id}`, cliente);
+  }
 }
